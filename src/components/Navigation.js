@@ -1,5 +1,5 @@
 import React from 'react';
-import { IoIosArrowBack, IoMdMic, IoMdSettings } from 'react-icons/io';
+import { IoIosArrowBack } from 'react-icons/io';
 import { Link } from 'react-router-dom';
 import './Navigation.css';
 
@@ -8,7 +8,7 @@ function Navigation() {
     <nav>
       <div className="nav-container">
         <Link to="/">
-          <IoIosArrowBack size={30} color="#007bff" />
+          <IoIosArrowBack className='nav-icon' size={32} color="grey" />
         </Link>
         <p className="navhead">Weather Dashboard</p>
       </div>
