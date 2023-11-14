@@ -22,13 +22,6 @@ function Home() {
         console.error(error);
       }
     });
-    const cards = document.querySelectorAll('.card');
-
-    cards.forEach((card, index) => {
-      if (index % 4 === 0 || index % 4 === 3) {
-        card.style.backgroundColor = '#fda';
-      }
-    });
   }, [cities]);
 
   const handleCityChange = async (e) => {
@@ -54,10 +47,10 @@ function Home() {
 
   return (
     <div className="container">
-      <p className="intro">Get live weather data by City name</p>
       <input
+        className='search'
         type="text"
-        placeholder="Enter city name"
+        placeholder="Search for city"
         value={selectedCity}
         onChange={handleCityChange}
       />
@@ -65,31 +58,48 @@ function Home() {
         {filteredCities.map((city) => (
           <li key={city} className="card">
             {weatherData[city] ? (
-              <>
+              <div className='cardtext'>
+                <div className='left'>
+                  <p>
+                    <span className='celsius'>
+                    {weatherData[city].current.temp_c}°
+                    </span>
+                    <span className='faren'>C/
+                      {weatherData[city].current.temp_f}
+                      °F
+                    </span>
+                  </p>
+                  <p>
+                    Humidity:
+                    {' '}
+                    {weatherData[city].current.humidity}
+                    %
+                  </p>
+                  <p>
+                    {' '}
+                    {city}
+                    <span>, {' '}
+                      {weatherData[city].location.country}</span>
+                  </p>
+                </div>
+                <div className="right">
                 <Link to={`/details/${city}`}><FontAwesomeIcon icon={faArrowCircleRight} className="arrow-icon" /></Link>
-                <p>
-                  <strong>City:</strong>
-                  {' '}
-                  {city}
-                </p>
-                <p>
-                  <strong>Country:</strong>
-                  {' '}
-                  {weatherData[city].location.country}
-                </p>
-                <p>
-                  <strong>Lat/Lon:</strong>
-                  {' '}
-                  {weatherData[city].location.lat}
-                  /
-                  {weatherData[city].location.lon}
-                </p>
-                <p>
-                  <strong>tz_id:</strong>
-                  {' '}
-                  {weatherData[city].location.tz_id}
-                </p>
-              </>
+                  <img className='image' src={weatherData[city].current.condition.icon} alt="Weather Condition" />
+                  <p>
+                    Wind Speed:
+                    {' '}
+                    {weatherData[city].current.wind_kph}
+                    {' '}
+                    km/h
+                  </p>
+                  <p>
+                    Condition:
+                    {' '}
+                    {weatherData[city].current.condition.text}
+                  </p>
+                </div>
+
+              </div>
             ) : (
               <div className="loading-spinner" />
             )}
