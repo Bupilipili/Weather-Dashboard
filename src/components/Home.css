@@ -14,6 +14,17 @@ body {
   text-align: center;
 }
 
+.search {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='8' /><line x1='21' y1='21' x2='16.65' y2='16.65' /></svg>");
+  background-repeat: no-repeat;
+  background-position: 4px center;
+  background-color: #044;
+  padding-left: 28px;
+  border-radius: 2rem;
+  width: 18rem;
+  border-color: #044;
+}
+
 .intro {
   font-family: 'Raleway', sans-serif;
   color: whitesmoke;
@@ -21,10 +32,11 @@ body {
 }
 
 .arrow-icon {
-  color: #007bff;
-  font-size: 20px;
+  color: #000;
+  font-size: 22px;
   position: relative;
-  left: 45%;
+  bottom: 5rem;
+  left: 5rem;
 }
 
 .card-list {
@@ -32,22 +44,51 @@ body {
   padding: 0;
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
 }
 
 .card {
   padding: 8px;
-  width: calc(50% - 24px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  background-color: #fd2;
-  display: inline-block;
-  vertical-align: top;
+  background-color: #044;
+  margin: 0.8rem;
+  border-radius: 1rem;
+}
+
+.cardtext {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.left {
+  text-align: left;
+}
+
+.right {
+  text-align: right;
+}
+
+.image {
+  width: 5rem;
+  margin-top: 1rem;
+}
+
+.celsius {
+  font-size: 4rem;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.faren {
+  font-size: 1rem;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .card p {
   margin: 0;
   padding: 1px 0;
-  font-size: 12px;
+  font-size: 11px;
+  font-family: 'Lilita One', sans-serif;
 }
 
 .details-link {
