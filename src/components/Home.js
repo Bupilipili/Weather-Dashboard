@@ -6,8 +6,16 @@ import fetchWeatherByCityName from '../services/api';
 import './Home.css';
 
 function Home() {
-  const [cities, setCities] = useState(['New York City', 'Tokyo', 'London', 'Paris', 'Beijing', 'Los Angeles', 'Moscow', 'Istanbul',
-    'Dubai', 'Singapore', 'Sydney', 'Rio de Janeiro', 'Mumbai', 'Rome', 'Toronto', 'Buenos Aires', 'Cairo', 'Hong Kong', 'Amsterdam', 'Seoul', 'Barcelona', 'San Francisco', 'Chicago', 'Bangkok', 'Berlin', 'Kuala Lumpur', 'Dar es salaam', 'Vancouver', 'Mombasa', 'Athens', 'Cape Town', 'Prague']);
+  const [cities, setCities] = useState(['Dar es Salaam', 'Tokyo', 'Lindi', 'London', 'Mtwara', 'Mwanza', 'Dodoma', 'Mbeya', 'Paris', 'Beijing', 'Arusha', 'Moscow', 'Istanbul',
+    'Dubai', 'Singapore', 'Sydney', 'Rio de Janeiro', 'Mumbai', 'Rome', 'Toronto', 'Buenos Aires', 'Cairo',
+    'Hong Kong', 'Amsterdam', 'Seoul', 'Barcelona', 'San Francisco', 'Chicago', 'Bangkok', 'Berlin',
+    'Kuala Lumpur', 'New York', 'Vancouver', 'Mombasa', 'Athens', 'Cape Town', 'Prague', 'Lisbon',
+    'Mexico City', 'Stockholm', 'Hanoi', 'Johannesburg', 'Helsinki', 'Oslo', 'Dublin', 'Budapest', 'Warsaw',
+    'Vienna', 'Brussels', 'Manila', 'Lima', 'Bogota', 'Bukoba', 'Kigali', 'Bucharest', 'Madrid', 'Nairobi', 'Abu Dhabi',
+    'Brisbane', 'Auckland', 'Montreal', 'Amman', 'Guatemala City', 'Tehran', 'Kiev', 'Kabul', 'Santiago',
+    'Caracas', 'Managua', 'San Salvador', 'Tbilisi', 'Beirut', 'Zagreb', 'Sofia', 'Sarajevo', 'Havana',
+    'Tallinn', 'Belgrade', 'Ljubljana', 'Skopje', 'Podgorica', 'Riga', 'Vilnius', 'Luxembourg City',
+    'Valletta', 'Chisinau', 'Monaco', 'Andorra la Vella', 'San Marino', 'Vatican City']);
   const [filteredCities, setFilteredCities] = useState(cities);
   const [selectedCity, setSelectedCity] = useState('');
   const [weatherData, setWeatherData] = useState({}); // Initialize as an empty object
@@ -42,6 +50,14 @@ function Home() {
 
       // Update filteredCities with the filtered list
       setFilteredCities(filtered);
+
+      // Display error message if the input city is not found
+      const errorElement = document.getElementById('error-message');
+      if (filtered.length === 0 && value.trim() !== '') {
+        errorElement.textContent = 'City not found';
+      } else {
+        errorElement.textContent = '';
+      }
     }
   };
 
@@ -54,6 +70,7 @@ function Home() {
         value={selectedCity}
         onChange={handleCityChange}
       />
+      <div id='error-message'></div>
       <ul className="card-list">
         {filteredCities.map((city) => (
           <li key={city} className="card">
@@ -62,7 +79,7 @@ function Home() {
                 <div className='left'>
                   <p>
                     <span className='celsius'>
-                    {weatherData[city].current.temp_c}°
+                      {weatherData[city].current.temp_c}°
                     </span>
                     <span className='faren'>C/
                       {weatherData[city].current.temp_f}
@@ -83,7 +100,7 @@ function Home() {
                   </p>
                 </div>
                 <div className="right">
-                <Link to={`/details/${city}`}><FontAwesomeIcon icon={faArrowCircleRight} className="arrow-icon" /></Link>
+                  <Link to={`/details/${city}`}><FontAwesomeIcon icon={faArrowCircleRight} className="arrow-icon" /></Link>
                   <img className='image' src={weatherData[city].current.condition.icon} alt="Weather Condition" />
                   <p>
                     Wind Speed:
