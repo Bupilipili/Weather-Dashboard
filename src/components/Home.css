@@ -1,0 +1,86 @@
+body {
+  background-color: #033;
+  backdrop-filter: blur(5px);
+}
+
+* {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.intro {
+  font-family: 'Raleway', sans-serif;
+  color: whitesmoke;
+  font-size: 16px;
+}
+
+.arrow-icon {
+  color: #007bff;
+  font-size: 20px;
+  position: relative;
+  left: 45%;
+}
+
+.card-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card {
+  padding: 8px;
+  width: calc(50% - 24px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #fd2;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.card p {
+  margin: 0;
+  padding: 1px 0;
+  font-size: 12px;
+}
+
+.details-link {
+  display: block;
+  text-align: right;
+  margin-top: 10px;
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.details-link:hover {
+  text-decoration: underline;
+}
+
+.loading-spinner {
+  border: 4px solid rgba(0, 0, 0, 0.3);
+  border-top: 4px solid black;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 1s linear infinite;
+  position: relative;
+  left: 50%;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@media screen and (min-width: 768px) {
+  .card {
+    width: 320px;
+  }
+}
