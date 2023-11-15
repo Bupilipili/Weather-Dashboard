@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './Details.css';
@@ -27,7 +25,7 @@ function Details() {
       // Replace this with your actual API key
       const apiKey = 'd1104dacc12792ce13054f5f24e4bfa9';
 
-      const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`);
+      const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`);
       const data = await response.json();
 
       // Filter out duplicate dates
@@ -71,17 +69,17 @@ function Details() {
           {forecastData ? (
             <div>
               <h3>5-Day Forecast</h3>
-              <ul>
+              <ul className='unordered'>
                 {forecastData.list.map((forecast) => (
-                  <li key={forecast.dt}>
+                  <li className='list' key={forecast.dt}>
                     {/* Display forecast details, e.g., date, weather icon, high and low temperatures */}
-                    {new Date(forecast.dt * 1000).toLocaleDateString()}: 
+                    {new Date(forecast.dt * 1000).toLocaleDateString()}
                     <img
                       src={`https://openweathermap.org/img/w/${forecast.weather[0].icon}.png`}
                       alt={forecast.weather[0].description}
                     />
-                    {forecast.weather[0].description}
-                    High: {forecast.main.temp_max}, Low: {forecast.main.temp_min}
+                    {forecast.weather[0].description}<br/>
+                    Temperature: {forecast.main.temp}°
                   </li>
                 ))}
               </ul>
