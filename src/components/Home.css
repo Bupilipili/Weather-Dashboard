@@ -23,9 +23,10 @@ body {
   background-repeat: no-repeat;
   background-position: 4px center;
   background-color: #044;
-  padding-left: 28px;
+  padding-left: 42px;
   border-radius: 2rem;
   width: 18rem;
+  height: 2rem;
   border-color: #044;
 }
 
@@ -132,6 +133,23 @@ body {
 
 @media screen and (min-width: 768px) {
   .card {
-    width: 320px;
+    width: 21rem;
+  }
+
+  .card-list {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto auto;
+    gap: 2px;
+  }
+
+  .card:hover {
+    transform: scale(1.12);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .card-list {
+    grid-template-columns: auto auto auto;
   }
 }
