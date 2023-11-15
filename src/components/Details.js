@@ -1,3 +1,5 @@
+
+
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './Details.css';
@@ -27,7 +29,19 @@ function Details() {
 
       const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`);
       const data = await response.json();
-      setForecastData(data);
+
+      // Filter out duplicate dates
+      const uniqueDates = [];
+      const filteredForecast = data.list.filter((forecast) => {
+        const date = new Date(forecast.dt * 1000).toLocaleDateString();
+        if (!uniqueDates.includes(date)) {
+          uniqueDates.push(date);
+          return true;
+        }
+        return false;
+      });
+
+      setForecastData({ ...data, list: filteredForecast });
     } catch (error) {
       console.error(error);
     }
@@ -66,6 +80,7 @@ function Details() {
                       src={`https://openweathermap.org/img/w/${forecast.weather[0].icon}.png`}
                       alt={forecast.weather[0].description}
                     />
+                    {forecast.weather[0].description}
                     High: {forecast.main.temp_max}, Low: {forecast.main.temp_min}
                   </li>
                 ))}
