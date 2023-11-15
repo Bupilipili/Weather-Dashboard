@@ -1,16 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import fetchWeatherByCityName from '../services/api';
 import './Details.css';
 
 function Details() {
   const { city } = useParams();
   const [weatherData, setWeatherData] = useState(null);
+  const [forecastData, setForecastData] = useState(null);
 
   const loadWeatherData = async (cityName) => {
     try {
-      const data = await fetchWeatherByCityName(cityName);
+      // Replace this with your actual API key
+      const apiKey = '786177d666c24f5f86d121735230609';
+
+      const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${cityName}`);
+      const data = await response.json();
       setWeatherData(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const loadForecastData = async (lat, lon) => {
+    try {
+      // Replace this with your actual API key
+      const apiKey = 'd1104dacc12792ce13054f5f24e4bfa9';
+
+      const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`);
+      const data = await response.json();
+      setForecastData(data);
     } catch (error) {
       console.error(error);
     }
@@ -21,113 +38,47 @@ function Details() {
     loadWeatherData(city);
   }, [city]);
 
+  useEffect(() => {
+    // Load 5-day forecast data when weather data is available
+    if (weatherData && weatherData.location) {
+      const { lat, lon } = weatherData.location;
+      loadForecastData(lat, lon);
+    }
+  }, [weatherData]);
+
   return (
     <div className="center-container">
-      <p className="intro2">
-        {city}
-        <br />
-        live weather report
-      </p>
       {weatherData ? (
-        <div className="weather-card-content">
-          <div className="card2">
-            <img src={weatherData.current.condition.icon} alt="Weather Condition" />
-            <p>
-              Condition:
-              {weatherData.current.condition.text}
-            </p>
-          </div>
-          <div className="card2">
-            <p>
-              Temperature:
-              {weatherData.current.temp_c}
-              °C (
-              {weatherData.current.temp_f}
-              °F)
-            </p>
-          </div>
-          <div className="card2">
-            <p>
-              Humidity:
-              {weatherData.current.humidity}
-              %
-            </p>
-          </div>
-          <div className="card2">
-            <p>
-              Wind Speed:
-              {' '}
-              {weatherData.current.wind_kph}
-              {' '}
-              km/h
-            </p>
-          </div>
-          <div className="card2">
-            <p>
-              Wind Degree:
-              {weatherData.current.wind_degree}
-              °
-            </p>
-          </div>
-          <div className="card2">
-            <p>
-              Wind Direction:
-              {weatherData.current.wind_dir}
-            </p>
-          </div>
-          <div className="card2">
-            <p>
-              Cloud Cover:
-              {weatherData.current.cloud}
-              %
-            </p>
-          </div>
-          <div className="card2">
-            <p>
-              Feels Like:
-              {' '}
-              {weatherData.current.feelslike_c}
-              °C (
-              {weatherData.current.feelslike_f}
-              °F)
-            </p>
-          </div>
-          <div className="card2">
-            <p>
-              Visibility:
-              {' '}
-              {weatherData.current.vis_km}
-              {' '}
-              km (
-              {weatherData.current.vis_miles}
-              {' '}
-              miles)
-            </p>
-          </div>
-          <div className="card2">
-            <p>
-              UV Index:
-              {weatherData.current.uv}
-            </p>
-          </div>
-          <div className="card2">
-            <p>
-              Wind Gust:
-              {' '}
-              {weatherData.current.gust_kph}
-              {' '}
-              km/h (
-              {weatherData.current.gust_mph}
-              {' '}
-              mph)
-            </p>
-          </div>
+        <div>
+          {/* Display current weather information */}
+          <h2>{weatherData.location.name}, {weatherData.location.country}</h2>
+          {/* Add other current weather details here */}
+
+          {forecastData ? (
+            <div>
+              <h3>5-Day Forecast</h3>
+              <ul>
+                {forecastData.list.map((forecast) => (
+                  <li key={forecast.dt}>
+                    {/* Display forecast details, e.g., date, weather icon, high and low temperatures */}
+                    {new Date(forecast.dt * 1000).toLocaleDateString()}: 
+                    <img
+                      src={`https://openweathermap.org/img/w/${forecast.weather[0].icon}.png`}
+                      alt={forecast.weather[0].description}
+                    />
+                    High: {forecast.main.temp_max}, Low: {forecast.main.temp_min}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : (
+            <div className="loading-spinner"></div>
+          )}
         </div>
       ) : (
-        <div className="loading-spinner" />
+        <div className="loading-spinner"></div>
       )}
     </div>
-
   );
 }
 
