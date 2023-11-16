@@ -28,11 +28,22 @@ body {
   width: 18rem;
   height: 2rem;
   border-color: #044;
+  margin-bottom: 0;
 }
 
 #error-message {
   margin: 1rem;
   font-family: 'Montserrat', sans-serif;
+}
+
+.search-history {
+  background-color: #044;
+  margin-top: 0;
+}
+
+.histo {
+  list-style: none;
+  text-align: center;
 }
 
 .intro {
