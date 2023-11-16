@@ -62,38 +62,49 @@ function Home() {
     }
   }, [userLocation]);
 
+  const saveToLocalStorage = (history) => {
+    localStorage.setItem('searchHistory', JSON.stringify(history));
+  };
+
+  useEffect(() => {
+    const storedHistory = localStorage.getItem('searchHistory');
+    if (storedHistory) {
+      setSearchHistory(JSON.parse(storedHistory));
+    }
+  }, []);
+  
+
   const handleCityChange = async (e) => {
     const { value } = e.target;
     const errorElement = document.getElementById('error-message');
-
+  
     // Clear the error message when the user starts typing in the input field
     errorElement.textContent = '';
-
+  
     if (e.key === 'Enter') {
       try {
         // Attempt to fetch data from the API for the entered city
         const data = await fetchWeatherByCityName(value);
-
+  
         if (data && data.current) {
           // Data is available, update weatherData with the new city data
           setWeatherData((prevData) => ({ ...prevData, [value]: data }));
-
-          // Add the current input to the search history
-          setSearchHistory((prevHistory) => [...prevHistory, value]);
-
-          // Save search history to local storage
-          localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
-
+  
           // Add the current input to the array list
           setCities((prevCities) => [...prevCities, value]);
           // Clear the input field
           setSelectedCity('');
           // Update filteredCities to include the new city
           setFilteredCities((prevFilteredCities) => [...prevFilteredCities, value]);
+  
+          // Add the current input to the search history
+          setSearchHistory((prevHistory) => [...prevHistory, value]);
+          // Save the updated search history to local storage
+          saveToLocalStorage([...searchHistory, value]);
         } else {
           // No data received from the API or incomplete data, display "City not found" error
           errorElement.textContent = 'Sorry, City not found';
-
+  
           // Remove the city from the array if there is an error
           setCities((prevCities) => prevCities.filter((city) => city !== value));
           // Update filteredCities to exclude the city with an error
@@ -104,7 +115,7 @@ function Home() {
         console.error(error);
         // Display "City not found" error for API fetch errors
         errorElement.textContent = 'City not found';
-
+  
         // Remove the city from the array if there is an error
         setCities((prevCities) => prevCities.filter((city) => city !== value));
         // Update filteredCities to exclude the city with an error
@@ -112,8 +123,25 @@ function Home() {
       }
     } else {
       setSelectedCity(value);
+  
+      // Check if the input matches any existing city from the API data
+      const matchingCity = Object.keys(weatherData).find(
+        (city) => city.toLowerCase() === value.toLowerCase(),
+      );
+  
+      // If the input matches an existing city, set filteredCities to contain only that matching city
+      if (matchingCity) {
+        setFilteredCities([matchingCity]);
+      } else {
+        // Filter the cities based on the input value
+        const filtered = cities.filter((city) => city.toLowerCase().includes(value.toLowerCase()));
+  
+        // Update filteredCities with the filtered list
+        setFilteredCities(filtered);
+      }
     }
   };
+  
 
   return (
     <div className="container">
