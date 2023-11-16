@@ -142,7 +142,7 @@ function Home() {
       {userLocation ? (
         <p> Current location, {userLocation}.</p>
       ) : (
-        <div className="loading-spinner" />
+        <div/>
       )}
       {document.getElementById('error-message') && document.getElementById('error-message').textContent === '' && (
         <ul className="card-list">
