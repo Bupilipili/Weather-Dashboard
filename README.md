@@ -28,9 +28,9 @@
 - [📝 License](#license)
 
 
-# ☁️ City Weather <a name="about-project"></a>
+# ☁️ Weatherboard <a name="about-project"></a>
 
-**City Weather** Is a weather information application that allows users to access real-time weather data for various cities around the world. Users can filter cities, view detailed weather information, and navigate between different pages to get a comprehensive view of weather conditions. The app offers a user-friendly interface with features like live weather updates, temperature in both Celsius and Fahrenheit, humidity levels, wind speed and direction, cloud cover, and more. It also includes icons representing weather conditions for easy visualization. The application is designed for users who want to quickly check the weather forecast for different cities and make informed decisions based on the current weather data.
+**Weatherboard** Is a weather information application that allows users to access real-time weather data for various cities around the world. Users can filter cities, view detailed weather information, and navigate between different pages to get a comprehensive view of weather conditions. The app offers a user-friendly interface with features like live weather updates, temperature in both Celsius and Fahrenheit, humidity levels, wind speed and more. It also includes icons representing weather conditions for easy visualization. The application is designed for users who want to quickly check the weather forecast for different cities and make informed decisions based on the current weather data.
 
 ## 🛠 Built With <a name="built-with"></a>
 
@@ -38,11 +38,11 @@
  
 - **[React]**
 - **[Redux]**
-- **[Jest]**
+- **[CSS]**
 
 ### Key Features <a name="key-features"></a>
 
-  - **[It allows users to add books]**
+  - **[It allows users to access weather data and forecast]**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -64,9 +64,9 @@ Clone this repository to your desired folder:
 
 Example commands:
 
-  git clone https://github.com/Bupilipili/City-Weather.git
+  git clone https://github.com/Bupilipili/Weather-Dashboard.git
  
-  cd City-Weather
+  cd Weather-Dashboard
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -90,11 +90,11 @@ Open the index.html file on the browser or use a VS code extension server to sta
 
 ### Deployment
 
-Click [here](https://city-weather-4e.netlify.app/)
+Click [here](https://dashweather.netlify.app/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## 👥 Authors <a name="authors"></a>
+## 👥 Author <a name="authors"></a>
 
 👤 **Bupilipili**
 
@@ -114,7 +114,7 @@ Click [here](https://city-weather-4e.netlify.app/)
 
 Contributions, issues, and feature requests are welcome!
 
-Feel free to check the [issues](https://github.com/Bupilipili/City-Weather/issues).
+Feel free to check the [issues](https://github.com/Bupilipili/Weather-DashbOARD/issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -126,7 +126,7 @@ If you like this project you can star the repository to make it look better.
 
 ## 🙏 Acknowledgments <a name="acknowledgements"></a>
 
-I would like to thank Nelson Sakwa for his fine work in the design of the great structure of this project.
+I would like to thank Ellipsis Co.Ltd for fine project requirements that helped me design the great structure of this project.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
