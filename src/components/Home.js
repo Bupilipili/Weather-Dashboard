@@ -132,7 +132,7 @@ function Home() {
           <div className="search-history">
             <ul className='histo'>
               {searchHistory.map((item, index) => (
-                <li key={index}>{item}</li>
+                <li className='li' key={index}>{item}</li>
               ))}
             </ul>
           </div>
